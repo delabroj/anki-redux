@@ -1,25 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Provider } from 'react-redux';
 import './App.css';
 
 import { store } from './redux/store';
+import Greeting from './Greeting';
+import Name from './Name';
 import Counter from './Counter';
 
-class App extends Component {
-  componentDidMount() {
-    store.subscribe(() => this.forceUpdate());
-  }
-
-  render() {
-    return (
-      <div className="App">
-        <Counter
-          count={store.getState()}
-          onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
-          onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
-        />
+const App = () => (
+  <div className="App">
+    <Provider store={store}>
+      <div>
+        <Greeting />
+        <Name />
+        <Counter />
       </div>
-    );
-  }
-}
+    </Provider>
+  </div>
+);
 
 export default App;
