@@ -24,7 +24,13 @@ class App extends Component {
   }
 
   render() {
-    return <div className="App">//</div>;
+    return (
+      <div className="App">
+        <p>{store.getState()}</p>
+        <button onClick={() => store.dispatch({ type: 'INCREMENT' })}>+</button>
+        <button onClick={() => store.dispatch({ type: 'DECREMENT' })}>-</button>
+      </div>
+    );
   }
 }
 

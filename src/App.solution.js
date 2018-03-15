@@ -18,6 +18,14 @@ const reducer = (state = initialState, action) => {
 
 const store = createStore(reducer);
 
+const Counter = ({ count, onIncrement, onDecrement }) => (
+  <div>
+    <p>{count}</p>
+    <button onClick={onIncrement}>+</button>
+    <button onClick={onDecrement}>-</button>
+  </div>
+);
+
 class App extends Component {
   componentDidMount() {
     store.subscribe(() => this.forceUpdate());
@@ -26,9 +34,11 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <p>{store.getState()}</p>
-        <button onClick={() => store.dispatch({ type: 'INCREMENT' })}>+</button>
-        <button onClick={() => store.dispatch({ type: 'DECREMENT' })}>-</button>
+        <Counter
+          count={store.getState()}
+          onIncrement={() => store.dispatch({ type: 'INCREMENT' })}
+          onDecrement={() => store.dispatch({ type: 'DECREMENT' })}
+        />
       </div>
     );
   }
