@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import { createStore } from 'redux';
 
 const initialState = 0;
 
@@ -15,12 +16,10 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-//
+const store = createStore(reducer);
 
 class App extends Component {
-  componentDidMount() {
-    store.subscribe(() => this.forceUpdate());
-  }
+  //
 
   render() {
     return (
