@@ -1,30 +1,20 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore } from 'redux';
 
-const initialCount = 0;
-const count = (state = initialCount, action) => {
+const initialState = {
+  count: 0,
+  name: '',
+};
+const reducer = (state = initialState, action) => {
   switch (action.type) {
     case 'INCREMENT':
-      return state + 1;
+      return { ...state, count: state.count + 1 };
     case 'DECREMENT':
-      return state - 1;
-    default:
-      return state;
-  }
-};
-
-const initialName = '';
-const name = (state = initialName, action) => {
-  switch (action.type) {
+      return { ...state, count: state.count - 1 };
     case 'SET_NAME':
-      return action.name;
+      return { ...state, name: action.name };
     default:
       return state;
   }
 };
-
-let reducer = combineReducers({
-  count,
-  name,
-});
 
 export const store = createStore(reducer);
