@@ -11,10 +11,9 @@ const App = () => (
   <div className="App">
     <Provider store={store}>
       <div>
-        <Greeting isPresident={true} />
+        <Greeting />
         <Name />
         <Counter />
-        <Greeting />
       </div>
     </Provider>
   </div>
