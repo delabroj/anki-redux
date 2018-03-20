@@ -1,4 +1,5 @@
 import { createStore, combineReducers } from 'redux';
+import { saveState, loadState } from './localStorage';
 
 const ACTION_INCREMENT = 'INCREMENT';
 const ACTION_DECREMENT = 'DECREMENT';

@@ -1,4 +1,5 @@
 import { createStore, combineReducers } from 'redux';
+import { saveState, loadState } from './localStorage';
 
 const ACTION_INCREMENT = 'INCREMENT';
 const ACTION_DECREMENT = 'DECREMENT';
@@ -42,8 +43,8 @@ const reducer = combineReducers({
   name,
 });
 
-const initialState = {
-  name: 'Bob',
-};
+const initialState = loadState();
 
 export const store = createStore(reducer, initialState);
+
+store.subscribe(() => saveState(store.getState()));
