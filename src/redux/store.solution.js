@@ -47,4 +47,8 @@ const initialState = loadState();
 
 export const store = createStore(reducer, initialState);
 
-store.subscribe(() => saveState(store.getState()));
+store.subscribe(() =>
+  saveState({
+    name: store.getState().name,
+  })
+);

@@ -43,4 +43,8 @@ const reducer = combineReducers({
   name,
 });
 
-export const store = createStore(reducer);
+const initialState = loadState();
+
+export const store = createStore(reducer, initialState);
+
+store.subscribe(() => saveState(store.getState()));
