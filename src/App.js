@@ -4,14 +4,10 @@ import { Router, Route, browserHistory } from 'react-router';
 
 import './App.css';
 import { store } from './redux/store';
-import Greeting from './Greeting';
-import Name from './Name';
 import Counter from './Counter';
 
 const Root = () => (
   <div>
-    <Greeting />
-    <Name />
     <Counter />
   </div>
 );

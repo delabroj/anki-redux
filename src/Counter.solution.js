@@ -1,22 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { incrementCounter, decrementCounter } from './redux/store';
+import * as actions from './redux/actions';
 
-let Counter = ({ count, onIncrement, onDecrement }) => (
+let Counter = ({ count, incrementCounter, decrementCounter }) => (
   <div>
     <p>{count}</p>
-    <button onClick={onIncrement}>+</button>
-    <button onClick={onDecrement}>-</button>
+    <button onClick={incrementCounter}>+</button>
+    <button onClick={decrementCounter}>-</button>
   </div>
 );
 const mapStateToProps = state => ({
   count: state.count,
 });
-const mapDispatchToProps = {
-  onIncrement: incrementCounter,
-  onDecrement: decrementCounter,
-};
-Counter = connect(mapStateToProps, mapDispatchToProps)(Counter);
+Counter = connect(mapStateToProps, actions)(Counter);
 
 export default Counter;
