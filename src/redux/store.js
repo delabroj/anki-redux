@@ -28,7 +28,10 @@ const reducer = combineReducers({
   loading,
 });
 
-//
+const thunk = store => next => action => {
+  if (typeof action === 'function') return action(store.dispatch);
+  next(action);
+};
 
 export const configureStore = () => {
   return createStore(reducer, applyMiddleware(thunk));

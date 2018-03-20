@@ -15,4 +15,11 @@ const doneLoading = () => ({
   type: DONE_LOADING,
 });
 
-//
+export const fetchList = () => dispatch => {
+  dispatch(isLoading());
+  fakeFetch()
+    .then(list => {
+      dispatch(setList(list));
+    })
+    .finally(() => dispatch(doneLoading()));
+};
