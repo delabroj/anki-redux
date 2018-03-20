@@ -1,21 +1,36 @@
 import { createStore, combineReducers } from 'redux';
 
+const ACTION_INCREMENT = 'INCREMENT';
+const ACTION_DECREMENT = 'DECREMENT';
+export const incrementCounter = () => ({
+  type: ACTION_INCREMENT,
+});
+export const decrementCounter = () => ({
+  type: ACTION_DECREMENT,
+});
+
 const initialCount = 0;
 const count = (state = initialCount, action) => {
   switch (action.type) {
-    case 'INCREMENT':
+    case ACTION_INCREMENT:
       return state + 1;
-    case 'DECREMENT':
+    case ACTION_DECREMENT:
       return state - 1;
     default:
       return state;
   }
 };
 
+const ACTION_SET_NAME = 'SET_NAME';
+export const setName = name => ({
+  type: ACTION_SET_NAME,
+  name,
+});
+
 const initialName = '';
 const name = (state = initialName, action) => {
   switch (action.type) {
-    case 'SET_NAME':
+    case ACTION_SET_NAME:
       return action.name;
     default:
       return state;

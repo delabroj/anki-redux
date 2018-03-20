@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import { incrementCounter, decrementCounter } from './redux/store';
+
 let Counter = ({ count, onIncrement, onDecrement }) => (
   <div>
     <p>{count}</p>
@@ -13,10 +15,10 @@ const mapStateToProps = state => ({
 });
 const mapDispatchToProps = dispatch => ({
   onIncrement() {
-    dispatch({ type: 'INCREMENT' });
+    dispatch(incrementCounter());
   },
   onDecrement() {
-    dispatch({ type: 'DECREMENT' });
+    dispatch(decrementCounter());
   },
 });
 Counter = connect(mapStateToProps, mapDispatchToProps)(Counter);
