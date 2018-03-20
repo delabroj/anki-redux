@@ -6,6 +6,20 @@ const setList = list => ({
   list,
 });
 
-export const fetchList = () => {
-  return fakeFetch().then(setList);
+export const IS_LOADING = 'IS_LOADING';
+export const DONE_LOADING = 'DONE_LOADING';
+const isLoading = () => ({
+  type: IS_LOADING,
+});
+const doneLoading = () => ({
+  type: DONE_LOADING,
+});
+
+export const fetchList = () => dispatch => {
+  dispatch(isLoading());
+  fakeFetch()
+    .then(list => {
+      dispatch(setList(list));
+    })
+    .finally(() => dispatch(doneLoading()));
 };

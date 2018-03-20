@@ -11,24 +11,28 @@ const list = (state = initialList, action) => {
   }
 };
 
-const reducer = combineReducers({
-  list,
-});
-
-const promise = store => next => action => {
-  if (typeof action.then === 'function') {
-    return action.then(next);
+const initialLoading = false;
+const loading = (state = initialLoading, action) => {
+  switch (action.type) {
+    case actions.IS_LOADING:
+      return true;
+    case actions.DONE_LOADING:
+      return false;
+    default:
+      return state;
   }
-  return next(action);
 };
 
-const logger = store => next => action => {
-  console.log('Action:', action);
-  let result = next(action);
-  console.log('New state:', store.getState());
-  return result;
+const reducer = combineReducers({
+  list,
+  loading,
+});
+
+const thunk = store => next => action => {
+  if (typeof action === 'function') return action(store.dispatch);
+  next(action);
 };
 
 export const configureStore = () => {
-  return createStore(reducer, applyMiddleware(promise, logger));
+  return createStore(reducer, applyMiddleware(thunk));
 };

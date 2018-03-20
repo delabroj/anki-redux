@@ -11,19 +11,25 @@ const list = (state = initialList, action) => {
   }
 };
 
+const initialLoading = false;
+const loading = (state = initialLoading, action) => {
+  switch (action.type) {
+    case actions.IS_LOADING:
+      return true;
+    case actions.DONE_LOADING:
+      return false;
+    default:
+      return state;
+  }
+};
+
 const reducer = combineReducers({
   list,
+  loading,
 });
-
-const promise = store => next => action => {
-  if (typeof action.then === 'function') {
-    return action.then(next);
-  }
-  return next(action);
-};
 
 //
 
 export const configureStore = () => {
-  return createStore(reducer, applyMiddleware(promise));
+  return createStore(reducer, applyMiddleware(thunk));
 };

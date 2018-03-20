@@ -11,6 +11,7 @@ class ShoppingList extends Component {
     return (
       <div>
         <h1>Your list:</h1>
+        {this.props.loading && <p>Loading...</p>}
         <ol>{this.props.list.map((item, i) => <li key={i}>{item}</li>)}</ol>
       </div>
     );
@@ -18,6 +19,7 @@ class ShoppingList extends Component {
 }
 const mapStateToProps = state => ({
   list: state.list,
+  loading: state.loading,
 });
 ShoppingList = connect(mapStateToProps, actions)(ShoppingList);
 
