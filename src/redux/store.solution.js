@@ -22,6 +22,13 @@ const promise = store => next => action => {
   return next(action);
 };
 
+const logger = store => next => action => {
+  console.log('Action:', action);
+  let result = next(action);
+  console.log('New state:', store.getState());
+  return result;
+};
+
 export const configureStore = () => {
-  return createStore(reducer, applyMiddleware(promise));
+  return createStore(reducer, applyMiddleware(promise, logger));
 };

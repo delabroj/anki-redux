@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import * as actions from './actions';
 
 const initialList = [];
@@ -15,8 +15,15 @@ const reducer = combineReducers({
   list,
 });
 
+const promise = store => next => action => {
+  if (typeof action.then === 'function') {
+    return action.then(next);
+  }
+  return next(action);
+};
+
 //
 
 export const configureStore = () => {
-  return createStore(reducer);
+  return createStore(reducer, applyMiddleware(promise));
 };
