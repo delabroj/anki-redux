@@ -3,21 +3,18 @@ import { Provider } from 'react-redux';
 import { Router, Route, browserHistory } from 'react-router';
 
 import './App.css';
-import { store } from './redux/store';
-import Greeting from './Greeting';
-import Name from './Name';
-import Counter from './Counter';
+import { configureStore } from './redux/store';
+
+import { ShoppingList } from './ShoppingList';
 
 const Root = () => (
   <div>
-    <Greeting />
-    <Name />
-    <Counter />
+    <ShoppingList />
   </div>
 );
 
 const App = () => (
-  <Provider store={store}>
+  <Provider store={configureStore()}>
     <div className="App">
       <Router history={browserHistory}>
         <Route path="/(:prefix)" component={Root} />
